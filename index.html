@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Medication Cost Estimator</title>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+<style>
+    body {
+        font-family: 'Arial', sans-serif;
+        background-color: #f5f5f5;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+    }
+    .calculator {
+        background-color: #fff;
+        border-radius: 10px;
+        box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        padding: 20px;
+        width: 300px;
+    }
+    h2 {
+        color: #333;
+        text-align: center;
+        margin-bottom: 20px;
+        font-size: 24px;
+        border-bottom: 2px solid #007bff;
+        padding-bottom: 10px;
+    }
+    .form-group {
+        margin-bottom: 20px;
+    }
+    label {
+        font-weight: bold;
+        display: block;
+        margin-bottom: 5px;
+    }
+    input[type="number"] {
+        width: calc(100% - 10px);
+        padding: 10px;
+        margin-bottom: 10px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+    }
+    .calculate-btn {
+        background-color: #007bff;
+        color: #fff;
+        border: none;
+        padding: 15px;
+        cursor: pointer;
+        border-radius: 5px;
+        width: 100%;
+        font-size: 16px;
+        transition: background-color 0.3s;
+    }
+    .calculate-btn:hover {
+        background-color: #0056b3;
+    }
+    .result {
+        font-size: 18px;
+        text-align: center;
+    }
+</style>
+</head>
+<body>
+
+<div class="calculator">
+    <h2>Medication Cost Estimator</h2>
+    <div class="form-group">
+        <label for="costOfTablets">Cost of Tablets ($)</label>
+        <input type="number" id="costOfTablets" name="costOfTablets" min="0" step="0.01" required>
+    </div>
+    <div class="form-group">
+        <label for="markUpPercentage">Mark-up Percentage (%)</label>
+        <input type="number" id="markUpPercentage" name="markUpPercentage" min="0" step="0.01" required>
+    </div>
+    <div class="form-group">
+        <label for="dispensingFee">Dispensing Fee ($)</label>
+        <input type="number" id="dispensingFee" name="dispensingFee" min="0" step="0.01" required>
+    </div>
+    <button class="calculate-btn" onclick="calculateTotalCost()">Calculate Total Cost</button>
+    <p class="result" id="totalCost"></p>
+</div>
+
+<script>
+function calculateTotalCost() {
+    var costOfTablets = parseFloat(document.getElementById('costOfTablets').value);
+    var markUpPercentage = parseFloat(document.getElementById('markUpPercentage').value);
+    var dispensingFee = parseFloat(document.getElementById('dispensingFee').value);
+    
+    var markUpAmount = (markUpPercentage / 100) * costOfTablets;
+    var totalCost = costOfTablets + markUpAmount + dispensingFee;
+    
+    document.getElementById('totalCost').innerHTML = "Total cost to the patient: $" + totalCost.toFixed(2);
+}
+</script>
+
+</body>
+</html>
